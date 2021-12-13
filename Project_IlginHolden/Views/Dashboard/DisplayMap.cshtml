@@ -1,0 +1,79 @@
+﻿@model string[]
+@* This page displays a user-created map. - Holden 16/09/2021*@
+@{
+    ViewData["Title"] = "Display Map";
+}
+<head>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Ensures optimal rendering on mobile devices. -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" /> <!-- Optimal Internet Explorer compatibility -->
+    <script src="~/js/ol.js"></script>
+</head>
+<body>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @* This script uses the OpenLayers JavaScript library to create a map from geometric information. - Holden 16/09/2021*@
+    <script type="text/javascript">
+		var vectorSource1 = new ol.source.Vector({
+			projection: "EPSG:4326",
+			url: "../map/blank_map.json",
+			format: new ol.format.GeoJSON()
+		});
+
+		var vectorLayer1 = new ol.layer.Vector({
+			source: vectorSource1
+		});
+
+		var color = {
+			fillColor: 'red',
+			strokeColor: 'red',
+			strokeWidth: 5
+		};
+
+		var vectorSource2 = new ol.source.Vector({
+			type: "FeatureCollection",
+			features: new ol.format.GeoJSON().readFeatures(@Html.Raw(Model[1]), {
+				dataProjection: "EPSG:4326",
+				featureProjection: "EPSG:3857",
+			}),
+		});
+
+		var vectorLayer2 = new ol.layer.Vector({
+			source: vectorSource2,
+            style: new ol.style.Style({
+                fill: new ol.style.Fill({
+                    color: 'red'
+                })
+            })
+		});
+
+		var center = ol.proj.transform([0, 0], "EPSG:4326", "EPSG:3857");
+
+		var view = new ol.View({
+			center: center,
+			zoom: 1
+		});
+
+		var map = new ol.Map({
+			target: 'map',
+			layers: [vectorLayer1, vectorLayer2],
+			view: view
+		});
+    </script>
+
+
+    <h1>Welcome to Mapify!</h1>
+
+    <div id="map" class="ol-overviewmap" style="height: 800px; width: 100%"></div>
+
+
+    <form id="saveMap" method="post" asp-action="SaveMap">
+        <label>Map Name:</label>
+        <input type="text" name="mapName" />
+        <input type="hidden" name="countryList" value="@Model[0]" />
+        <button>Save Map</button>
+    </form>
+</body>

@@ -1,0 +1,39 @@
+﻿@model List<Project_IlginHolden.Models.DB.Country>
+@* This page allows the user to create a map by selecting the countries they wish to be included. - Holden 16/09/2021*@
+@{
+    ViewData["Title"] = "Create Map";
+}
+<head>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Ensures optimal rendering on mobile devices. -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" /> <!-- Optimal Internet Explorer compatibility -->
+    <script src="~/js/ol.js"></script>
+</head>
+<body>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @* This script shows a loading message once the form has been submitted. - Holden 16/09/2021*@
+    <script type="text/javascript">
+        function loading() {
+            document.getElementById("loadingMessage").innerHTML = "Loading a map with the selected countries... Please wait...";
+        }
+    </script>
+
+    <h1>Create a Map</h1>
+
+    <p>Select your countries (you can select multiple by holding down "Ctrl"):</p>
+    @* This form creates a selectable list from all countries available in the database -  - Holden 16/09/2021*@
+    <form name="createdMap" id="createdMap" method="post" asp-action="displayMap" style="display:inline-flex">
+        <select name="countries" multiple size="25">
+            @foreach (Project_IlginHolden.Models.DB.Country country in Model)
+            {
+                <option value="@country.Id.ToString()">@country.Admin</option>
+            }
+        </select>
+        <button id="submit" style="margin:auto; align-self:center; margin-left: 20px" onclick="loading()">Create!</button>
+    </form>
+    <p id="loadingMessage"></p>
+</body>

@@ -1,0 +1,49 @@
+﻿@*
+    Once the user's paypal payment has gone through, they are redirected to this page which makes them logout and log
+    back in to view changes in their accounts - Ilgin 10.09.2021
+*@
+@{
+    Layout = null;
+}
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    @* Styling added for thank you page - Ilgin 10.09.2021 *@
+    <style>
+        h1{
+            font-family: 'Roboto'
+        }
+        p {
+            font-family: 'Roboto'
+        }
+        .button {
+            background-color: #00B0FF;
+            border: none;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 12px;
+        }
+    </style>
+</head>
+<h1>Thank you for your payment!</h1>
+<p>Your account has now been upgraded.</p>
+<p>To view the changes you will have to sign out and sign back in again.</p>
+<p>Please click the button below to signout</p>
+@* Logout button added - Ilgin 10.09.2021 *@
+@{
+    if (User.Identity.IsAuthenticated)
+    {
+        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+            <button type="submit" class="button">Click here to Logout</button>
+        </form>
+    }
+    else
+    {
+        <p>You have successfully logged out of the application.</p>
+    }
+}

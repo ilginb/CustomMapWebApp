@@ -1,0 +1,124 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    @* Adding links for custom Google fonts Ilgin 05.09.2021 *@
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        /*Column styling for 2 columns - Ilgin 05.09.2021*/
+        .column {
+            float: left;
+            width: 50%;
+            padding: 10px;
+            height: 100vh;
+
+        }
+        /*Column styling for 3 columns Ilgin 05.09.2021*/
+        .column3 {
+            float: left;
+            width: 33.33%;
+            padding: 40px;
+            height: 100vh;
+        }
+
+
+        /* Clear floats after the columns Ilgin 05.09.2021*/
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+        /*Adding styling to button Ilgin 05.09.2021*/
+        .button {
+            background-color: #00B0FF;
+            border: none;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 12px;
+        }
+
+        #container {
+            text-align: center;
+        }
+        /*Adding smooth scroll Ilgin 05.09.2021*/
+        html {
+            scroll-behavior: smooth;
+        }
+
+        #section1 {
+            height: 100vh;
+        }
+
+        #section2 {
+            height: 100vh;
+        }
+
+        p {
+            font-family: 'Roboto'
+        }
+        /*Making the columns responsive - Ilgin 11.09.2021*/
+        @@media screen and (max-width: 600px) {
+            .column {
+                width: 100%;
+            }
+            .column3{
+                width:100%;
+            }
+        }
+       
+    </style>
+</head>
+<div class="main" id="section1">
+    @* Adding application information Ilgin 05.09.2021 *@
+    @* Illustrations retrieved from Icons8 Ilgin 05.09.2021 *@
+    <div class="row">
+        <div class="column" style="display:flex; justify-content:center; align-items:center;flex-direction:column">
+            <h2 style="font-family: 'Staatliches';font-size:60px">Mapify</h2>
+
+            <p>This is a student project that aims to act as a virtual map generator to create custom geographical borders.</p>
+            <p>It's a great web app for anybody who's interested in geography or alternate history.</p>
+            <div id="container"> <a href="#section2"><button class="button" onclick="#section2">Learn More</button></a> <a asp-area="Identity" asp-page="/Account/Register"><button class="button">Get Started</button></a></div>
+
+        </div>
+        <div class="column">
+            <img src="/Images/clip-globe.png" style="width:100%">
+            @*<a href="https://icons8.com/illustrations/author/5eb29f8301d0360018f18b01">Maria Shukshina</a> from <a href="https://icons8.com/illustrations">Ouch!</a>*@
+        </div>
+    </div>
+</div>
+<div class="main" id="section2">
+    @* Additional app information Ilgin 05.09.2021 *@
+    @* Illustrations retrieved from Icons8 Ilgin 05.09.2021 *@
+    <div class="row">
+        <div class="column3">
+            <img src="/Images/group.png" style="width:100%">
+            <p style="padding-top:30px">Create your custom maps for cartography, alternative history, travel, geography, school projects or blogs! </p>
+        </div>
+        <div class="column3">
+            <img src="/Images/clip-1676.png" style="width:100%">
+            <p style="padding-top:30px">Save up to three maps on a free account and unlimited maps with a membership for just $30 NZD.</p>
+        </div>
+        <div class="column3">
+            <img src="/Images/world.png" style="width:100%">
+            <p style="padding-top:30px">You can create, edit and save detailed maps that include subdivisions.</p>
+        </div>
+    </div>
+</div>
+@*Illustration by <a href="https://icons8.com/illustrations/author/5c07e68d82bcbc0092519bb6">Icons 8</a> from <a href="https://icons8.com/illustrations">Ouch!</a>*@
+@*Illustration by <a href="https://icons8.com/illustrations/author/602b6fa7123f993a3afdba7b">  Victoria Chepkasova</a> from <a href="https://icons8.com/illustrations">Ouch!</a>*@
+@*Illustration by <a href="https://icons8.com/illustrations/author/602b6fa7123f993a3afdba7b">  Victoria Chepkasova</a> from <a href="https://icons8.com/illustrations">Ouch!</a>*@
+@*Illustration by <a href="https://icons8.com/illustrations/author/602b6fa7123f993a3afdba7b">  Victoria Chepkasova</a> from <a href="https://icons8.com/illustrations">Ouch!</a>*@

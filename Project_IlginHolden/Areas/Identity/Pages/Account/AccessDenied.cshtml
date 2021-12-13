@@ -1,0 +1,14 @@
+﻿@page
+@model AccessDeniedModel
+@{
+    ViewData["Title"] = "Access denied";
+}
+
+<header>
+    <h1 class="text-danger">@ViewData["Title"]</h1>
+    <p class="text-danger">You do not have access to this resource.</p>
+    <h1>To upgrade your account, click on the button below</h1>
+    @* Link to upgrade account -Ilgin 11.09.21 *@
+    <button><a href="/Identity/Account/Manage">Upgrade Account</a></button>
+
+</header>

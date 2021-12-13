@@ -1,0 +1,40 @@
+﻿@using Project_IlginHolden.ViewModels
+@model List<Project_IlginHolden.ViewModels.UserRolesViewModel>
+@{
+    ViewData["Title"] = "Index";
+}
+@* View to display all users with their email addresses and roles - Ilgin 11.09.21 *@
+
+<h1>All Users</h1>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>User Id</th>
+            <th>Email</th>
+            <th>Roles</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+        <tr>
+            <td>@user.UserId</td>
+            <td>@user.Email</td>
+            <td>@string.Join(" , ", user.Roles.ToList())</td>
+            <td>
+                <a class="btn btn-primary" asp-controller="UserRoles" asp-action="Manage" asp-route-userId="@user.UserId">Manage Roles</a>
+            </td>
+            <td>
+                <form asp-controller="UserRoles" asp-action="Delete" asp-route-userId="@user.UserId" method="post">
+                    <button type="submit" class="btn btn-danger">
+                        Delete
+                    </button>
+                </form>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+
